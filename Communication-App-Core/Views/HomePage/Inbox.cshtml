@@ -1,0 +1,108 @@
+﻿@using EntityLayer.Concrete
+@model List<Message>
+@{
+    ViewData["Title"] = "Inbox";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<div class="main-content" id="panel">
+    <!-- Topnav -->
+    <!-- Header -->
+    <!-- Header -->
+
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+
+                <h6 class="h2 text-white d-inline-block mb-0">Tables</h6>
+                <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                    <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                        <li class="breadcrumb-item"><a href="#">Gelen Mesajlar</a></li>
+                    </ol>
+                </nav>
+
+
+                <div class="col-lg-6 col-5 text-right" style="margin-left:300px;">
+                    <a href="/HomePage/SendMessage/" class="btn btn-sm btn-neutral">Yeni Mesaj</a>
+                    <a href="/Login/LogOut/" class="btn btn-sm btn-neutral">Cıkıs Yap</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page content -->
+
+    <div class="container-fluid mt--12">
+
+        <!-- Dark table -->
+        <div class="row">
+            <div class="col">
+                <div class="card bg-default shadow">
+                    <div class="card-header bg-transparent border-0">
+                        <h3 class="text-white mb-0">Gelen Mesajlar</h3>
+                    </div>
+                    <div class="table-responsive" style="overflow-x: auto;">
+                        <table class="table align-items-center table-dark table-flush" style="width: 100%;">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col" class="sort" data-sort="name">kisi</th>
+                                    <th scope="col" class="sort" data-sort="budget">İsim</th>
+                                    <th scope="col" class="sort" data-sort="budget">Konu</th>
+                                    <th scope="col" class="sort" data-sort="budget">İcerik</th>
+                                     <th scope="col" class="sort" data-sort="status"></th>
+                                   <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="list">
+                                @foreach (var item in Model)
+                                {
+
+
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="media align-items-center">
+                                                <a href="#" class="avatar rounded-circle mr-3">
+                                                    <img alt="Image placeholder" src="@item.ImageUrl">
+                                                
+                                                </a>
+
+                                            </div>
+                                        </th>
+
+                                        <td class="budget">
+                                            @item.Name @item.Surname
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-dot mr-4">
+                                                <i class="bg-warning"></i>
+                                                <span class="status">@item.Subject</span>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-dot mr-4">
+                                                <i class="bg-warning"></i>
+                                                <span class="status">@item.Content.Substring(0, 9)...</span>
+                                            </span>
+                                        </td>
+                                        <td class="budget">
+                                            <a class="btn btn-danger" href="/HomePage/DeleteReceivedMessages/@item.MessageId">Sil</a>
+                                        </td>
+                                        <td class="budget">
+                                            <a class="btn btn-success" href="/HomePage/InboxMessageDetail/@item.MessageId">Mesajı Gor</a>
+                                        </td>
+
+
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+    </div>
+</div>
+
+
